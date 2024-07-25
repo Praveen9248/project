@@ -1,0 +1,12 @@
+{% extends 'splitup/base_generic.html' %}
+
+{% block title %}Create Expense{% endblock %}
+
+{% block content %}
+<h2>Create Expense</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

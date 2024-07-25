@@ -1,0 +1,26 @@
+{% extends 'splitup/base_generic.html' %}
+
+{% block title %}Expense Detail{% endblock %}
+
+{% block content %}
+<h2>{{ expense.title }}</h2>
+<p>Total Amount: ${{ expense.total_amount }}</p>
+<p>Created By: {{ expense.created_by.username }}</p>
+<p>Date Created: {{ expense.date_created }}</p>
+
+<h3>Participants</h3>
+<ul>
+    {% for participant in participants %}
+        <li>{{ participant.user.username }}: ${{ participant.amount_due }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_participant' expense.id %}">Add Participant</a>
+
+<h3>Payments</h3>
+<ul>
+    {% for payment in payments %}
+        <li>{{ payment.paid_by.username }} paid {{ payment.paid_to.username }} ${{ payment.amount }} on {{ payment.date_paid }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'record_payment' expense.id %}">Record Payment</a>
+{% endblock %}
